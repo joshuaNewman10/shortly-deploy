@@ -3,7 +3,7 @@ var env = require('./common').config();
 
 var environment = process.env.NODE_ENV;
 console.log(environment);
-var port = env.port;
+var port = process.env.port || 3000;
 console.log(port);
 
 app.listen(port);
