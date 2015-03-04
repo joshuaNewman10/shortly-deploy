@@ -1,7 +1,7 @@
 var express = require('express');
 var partials = require('express-partials');
 var util = require('./lib/utility');
-
+var env = require('./common');
 var handler = require('./lib/request-handler');
 
 var app = express();
@@ -15,6 +15,14 @@ app.configure(function() {
   app.use(express.cookieParser('shhhh, very secret'));
   app.use(express.session());
 });
+
+// app.configure('development', function(){
+//     db = require('mongoskin').db('localhost:27017/bands');
+// });
+
+// app.configure('production', function(){
+//     db = require('mongoskin').db('localhost:37751/bands');
+// });
 
 app.get('/', util.checkUser, handler.renderIndex);
 app.get('/create', util.checkUser, handler.renderIndex);
