@@ -129,8 +129,11 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
   ]);
 
+  console.log("flag1")
   grunt.registerTask('deploy',function(n) {
+     console.log("flag2")
     if(grunt.option('prod')) {
+        console.log("flag3")
       grunt.task.run(['cssmin']);
       grunt.task.run(['concat']);
       grunt.task.run(['uglify']);
