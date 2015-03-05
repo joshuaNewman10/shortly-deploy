@@ -91,6 +91,21 @@ module.exports = function(grunt) {
       prodServer: {
       }
     },
+
+    buildcontrol: {
+      options: {
+        dir: './',
+        commit: true,
+        push: true,
+        message: 'new build from commit on branch'
+      },
+      production: {
+        options: {
+          remote: 'azure',
+          branch: 'master'
+        }
+      }
+    }
   });
 
   //3) load tasks
@@ -102,6 +117,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-build-control');
 
  ///4) register custom task
   grunt.registerTask('server-dev', function (target) {
@@ -133,7 +149,7 @@ module.exports = function(grunt) {
       //   console.log("flag3")
       // grunt.task.run([]);
       // grunt.task.run(['concat']);
-      // grunt.task.run(['uglify']);
+      grunt.task.run(['buildControl:production']);
     } else {
       grunt.task.run(['cssmin']);
       grunt.task.run(['concat']);
