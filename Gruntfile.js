@@ -127,6 +127,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+  console.log("flag-build")
   ]);
 
   console.log("flag1")
