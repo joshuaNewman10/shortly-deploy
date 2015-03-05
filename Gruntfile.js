@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 
     jshint: {
       files: [
-        'srcerver.js',
+        'server.js',
         'public/client/*.js'
       ],
       options: {
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
       },
       target: {
         files: {
-          'public/styles.min.css': 'public/style.css'
+          'public/styles-min.min.css': 'public/style.css'
         }
       }
     },
@@ -129,18 +129,21 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
   ]);
 
-  grunt.registerTask('upload',function(n) {
+  grunt.registerTask('deploy',function(n) {
     if(grunt.option('prod')) {
       grunt.task.run(['cssmin']);
-      // grunt.task.run(['jshint']);
       grunt.task.run(['concat']);
       grunt.task.run(['uglify']);
     } else {
-      grunt.task.run([ 'server-dev' ]);
+      grunt.task.run(['cssmin']);
+      grunt.task.run(['concat']);
+      grunt.task.run(['uglify']);
+      grunt.task.run(['mochaTest']);
+      grunt.task.run(['nodemon']);
     }
   } );
 
-  grunt.registerTask('deploy',['cssmin','jshint','concat','uglify', 'mochaTest']);
+//  grunt.registerTask('deploy',['jshint', 'cssmin','concat','uglify', 'mochaTest']);
 
 
 };
