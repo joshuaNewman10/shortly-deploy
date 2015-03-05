@@ -90,22 +90,22 @@ module.exports = function(grunt) {
     shell: {
       prodServer: {
       }
-    },
-
-    buildcontrol: {
-      options: {
-        dir: './',
-        commit: true,
-        push: true,
-        message: 'new build from commit on branch'
-      },
-      production: {
-        options: {
-          remote: 'azure',
-          branch: 'master'
-        }
-      }
     }
+
+    // buildcontrol: {
+    //   options: {
+    //     dir: './',
+    //     commit: true,
+    //     push: true,
+    //     message: 'new build from commit on branch'
+    //   },
+    //   production: {
+    //     options: {
+    //       remote: 'azure',
+    //       branch: 'master'
+    //     }
+    //   }
+    // }
   });
 
   //3) load tasks
@@ -149,7 +149,7 @@ module.exports = function(grunt) {
       //   console.log("flag3")
       // grunt.task.run([]);
       // grunt.task.run(['concat']);
-      grunt.task.run(['buildControl:production']);
+      // grunt.task.run(['buildControl:production']);
     } else {
       grunt.task.run(['cssmin']);
       grunt.task.run(['concat']);
