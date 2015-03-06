@@ -89,23 +89,15 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command:  'git push azure master',
+        options: {
+          stdout: true,
+          stederr: true,
+          failOnError: true
+        }
       }
     }
 
-    // buildcontrol: {
-    //   options: {
-    //     dir: './',
-    //     commit: true,
-    //     push: true,
-    //     message: 'new build from commit on branch'
-    //   },
-    //   production: {
-    //     options: {
-    //       remote: 'azure',
-    //       branch: 'master'
-    //     }
-    //   }
-    // }
   });
 
   //3) load tasks
@@ -139,27 +131,29 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('test', [
+    'jshint',
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', ['cssmin', 'concat', 'uglify']);
+  grunt.registerTask('build', [
+    'concat',
+    'uglify',
+    'cssmin'
+  ]);
 
-  grunt.registerTask('deploy',function(n) {
+  grunt.registerTask('upload',function(n) {
     if(grunt.option('prod')) {
-      //   console.log("flag3")
-      // grunt.task.run([]);
-      // grunt.task.run(['concat']);
-      // grunt.task.run(['buildControl:production']);
+      grunt.task.run(['shell:prodServer']);
     } else {
-      grunt.task.run(['cssmin']);
-      grunt.task.run(['concat']);
-      grunt.task.run(['uglify']);
-      grunt.task.run(['mochaTest']);
-      grunt.task.run(['nodemon']);
+      grunt.task.run(['server-dev']);
     }
   });
 
-//  grunt.registerTask('deploy',['jshint', 'cssmin','concat','uglify', 'mochaTest']);
+  grunt.registerTask('deploy',[
+    'test',
+    'build',
+    'upload',
+  ]);
 
 
 };

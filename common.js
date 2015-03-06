@@ -2,12 +2,12 @@ var configuration =
 { development:
   {
     port: 3000,
-    mongoCredentials: 'mongodb://localhost/test'
+    mongoCredentials: 'mongodb://localhost/shortlydb'
   },
   production:
   {
     port: 80,
-    mongoCredentials: 'mongodb://deploy-shortlyDB:AfKiZYWmF7q.r.Qj2YUl8OFgCcgaI0wCCwV2VggQ6e0-@ds050077.mongolab.com:50077/deploy-shortlyDB' //<-- Insert MS mongo server URL/pass
+    mongoCredentials: process.env.CUSTOMCONNSTR_MONGOLAB_URI //<-- Insert MS mongo server URL/pass
   }
 };
 
@@ -16,3 +16,4 @@ exports.config = function() {
   return configuration[node_env];
 };
 
+// var port = process.env.PORT || 4568;

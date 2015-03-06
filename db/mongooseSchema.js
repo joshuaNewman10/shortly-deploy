@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 var crypto = require('crypto');
 //sick comment
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/shortlydb');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
